@@ -4,10 +4,10 @@ Lizard (lizard.build) supplies an Inspect AI `SandboxEnvironment` backed by Liza
 
 ## Install and use
 
-Requires Python 3.11+, Inspect AI 0.3.280+, a Lizard project, and a project API key. The first PyPI release is pending. Install from source:
+Requires Python 3.11+, Inspect AI 0.3.280+, a Lizard project, and a project API key.
 
 ```sh
-pip install 'inspect-lizard @ git+https://github.com/lizard-build/integrations.git#subdirectory=packages/inspect-lizard'
+pip install inspect-lizard
 ```
 
 Set `LIZARD_API_KEY` and `LIZARD_PROJECT_ID`. The package registers the name `lizard` through Inspect's extension entry point.
@@ -28,7 +28,7 @@ my_task = Task(
 )
 ```
 
-Run the [task example](examples/eval.py) with `inspect eval examples/eval.py --model <provider/model>` and that model provider's credentials. You can also use `--sandbox lizard` with tasks that do not require Docker-specific setup.
+Run the [task example](https://github.com/lizard-build/integrations/blob/main/packages/inspect-lizard/examples/eval.py) with `inspect eval examples/eval.py --model <provider/model>` and that model provider's credentials. You can also use `--sandbox lizard` with tasks that do not require Docker-specific setup.
 
 ## Contract and limits
 

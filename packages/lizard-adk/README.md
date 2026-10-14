@@ -10,7 +10,7 @@ Requires Python 3.11+, ADK 2.12+, a Lizard project, and a project API key.
 pip install lizard-adk
 ```
 
-Set `LIZARD_API_KEY` and `LIZARD_PROJECT_ID`. The [agent example](examples/agent.py) also needs `GOOGLE_API_KEY` for Gemini.
+Set `LIZARD_API_KEY` and `LIZARD_PROJECT_ID`. The [agent example](https://github.com/lizard-build/integrations/blob/main/packages/lizard-adk/examples/agent.py) also needs `GOOGLE_API_KEY` for Gemini.
 
 ## Use
 
@@ -33,7 +33,7 @@ runner = InMemoryRunner(
 # Run the agent, then always await runner.close() in a finally block.
 ```
 
-Register the plugin in both places: `get_tools()` exposes the tools, and `App.plugins` runs cleanup. See [the complete example](examples/agent.py) for session creation, a prompt, and cleanup.
+Register the plugin in both places: `get_tools()` exposes the tools, and `App.plugins` runs cleanup. See [the complete example](https://github.com/lizard-build/integrations/blob/main/packages/lizard-adk/examples/agent.py) for session creation, a prompt, and cleanup.
 
 | Tool | Result |
 | --- | --- |

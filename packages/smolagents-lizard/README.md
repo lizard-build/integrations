@@ -4,10 +4,10 @@ Lizard (lizard.build) provides a remote Python executor for smolagents. The agen
 
 ## Install and use
 
-Requires Python 3.11+, smolagents 1.26, a Lizard project, and a project API key. The first PyPI release is pending. Install from source:
+Requires Python 3.11+, smolagents 1.26, a Lizard project, and a project API key.
 
 ```sh
-pip install 'smolagents-lizard @ git+https://github.com/lizard-build/integrations.git#subdirectory=packages/smolagents-lizard'
+pip install smolagents-lizard
 ```
 
 Set `LIZARD_API_KEY` and `LIZARD_PROJECT_ID`. The example also needs `HF_TOKEN` for its model provider.
