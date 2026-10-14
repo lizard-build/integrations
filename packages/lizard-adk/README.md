@@ -4,10 +4,10 @@ Lizard (lizard.build) connects ADK agents to Lizard Sandboxes. The plugin suppli
 
 ## Install
 
-Requires Python 3.11+, ADK 2.12+, a Lizard project, and a project API key. The first PyPI release is pending. Install from source:
+Requires Python 3.11+, ADK 2.12+, a Lizard project, and a project API key.
 
 ```sh
-pip install 'lizard-adk @ git+https://github.com/lizard-build/integrations.git#subdirectory=packages/lizard-adk'
+pip install lizard-adk
 ```
 
 Set `LIZARD_API_KEY` and `LIZARD_PROJECT_ID`. The [agent example](examples/agent.py) also needs `GOOGLE_API_KEY` for Gemini.

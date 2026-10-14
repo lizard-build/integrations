@@ -1,18 +1,14 @@
-name: Publish Python package
+name: Publish lizard-adk
 on:
   workflow_dispatch:
     inputs:
-      package:
-        type: choice
-        required: true
-        options: [lizard-adk, smolagents-lizard, inspect-lizard]
       version:
         type: string
         required: true
 permissions:
   contents: read
 concurrency:
-  group: publish-${{ inputs.package }}
+  group: publish-lizard-adk
   cancel-in-progress: false
 jobs:
   build:
@@ -20,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: packages/${{ inputs.package }}
+        working-directory: packages/lizard-adk
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -46,7 +42,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: distributions
-          path: packages/${{ inputs.package }}/dist/
+          path: packages/lizard-adk/dist/
   publish:
     needs: build
     runs-on: ubuntu-latest
