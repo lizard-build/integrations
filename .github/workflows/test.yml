@@ -1,0 +1,51 @@
+name: Test integrations
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  python:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        package: [lizard-adk, smolagents-lizard, inspect-lizard]
+        python: ['3.11', '3.12']
+    defaults:
+      run:
+        working-directory: packages/${{ matrix.package }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - run: python -m pip install -e '.[dev]'
+      - run: ruff check .
+      - run: ruff format --check .
+      - run: mypy src
+      - run: pytest tests -m 'not live' --disable-socket --allow-unix-socket
+      - run: python -m build
+      - run: twine check dist/*
+  mastra:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packages/mastra
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: packages/mastra/package-lock.json
+      - run: npm ci
+      - run: npm run build
+      - run: npm test
+      - run: npm pack --dry-run
+      - name: Check shared worker
+        working-directory: .
+        run: |
+          python scripts/sync-worker.py
+          git diff --exit-code -- packages/mastra/src/worker.ts

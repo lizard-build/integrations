@@ -1,0 +1,39 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "lizard-adk"
+version = "0.1.0"
+description = "ADK tools and lifecycle hooks for Lizard Sandboxes."
+readme = "README.md"
+requires-python = ">=3.11"
+license = "Apache-2.0"
+authors = [{name = "Lizard"}]
+dependencies = ["lizard-sdk>=0.1.60,<0.2", "anyio>=4,<5", "google-adk>=2.12.0,<3"]
+
+[project.urls]
+Homepage = "https://lizard.build/sandboxes"
+Repository = "https://github.com/lizard-build/integrations"
+Issues = "https://github.com/lizard-build/integrations/issues"
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "pytest-asyncio>=0.24", "pytest-socket>=0.7", "ruff>=0.9", "mypy>=1.14", "build", "twine"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/lizard_adk"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+markers = ["live: creates temporary cloud resources; requires LIZARD_LIVE_TESTS=1"]
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]
+
+[tool.mypy]
+python_version = "3.11"
+check_untyped_defs = true
+ignore_missing_imports = true

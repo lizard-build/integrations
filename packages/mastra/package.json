@@ -1,0 +1,52 @@
+{
+  "name": "@lizard-build/mastra",
+  "version": "0.1.0",
+  "description": "Lizard Sandboxes provider for Mastra workspaces.",
+  "type": "module",
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "@mastra/core": "^1.75.0"
+  },
+  "dependencies": {
+    "@lizard-build/sdk": "^0.1.60"
+  },
+  "devDependencies": {
+    "@mastra/core": "1.75.0",
+    "@types/node": "^22.0.0",
+    "typescript": "^5.9.3",
+    "vitest": "^5.0.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lizard-build/integrations.git",
+    "directory": "packages/mastra"
+  },
+  "homepage": "https://github.com/lizard-build/integrations/tree/main/packages/mastra",
+  "bugs": {
+    "url": "https://github.com/lizard-build/integrations/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
