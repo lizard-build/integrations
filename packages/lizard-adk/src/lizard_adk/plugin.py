@@ -23,7 +23,10 @@ async def _blocking(fn: Callable[..., T], *args: Any, **kwargs: Any) -> T:
         return await asyncio.shield(task)
     except asyncio.CancelledError:
         with anyio.CancelScope(shield=True):
-            await task
+            try:
+                await task
+            except Exception:
+                pass  # A failed SDK call must not replace the caller's cancellation.
         raise
 
 

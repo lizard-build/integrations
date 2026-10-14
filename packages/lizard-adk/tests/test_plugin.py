@@ -136,3 +136,24 @@ async def test_cancelled_creation_releases_resource(native):
         await task
     sandbox.kill.assert_called_once()
     await plugin.close()
+
+
+async def test_cancelled_sdk_call_preserves_cancellation_after_error():
+    import threading
+
+    from lizard_adk.plugin import _blocking
+
+    started = threading.Event()
+    release = threading.Event()
+
+    def delayed_error():
+        started.set()
+        release.wait(3)
+        raise RuntimeError("transport failed")
+
+    task = asyncio.create_task(_blocking(delayed_error))
+    await asyncio.to_thread(started.wait, 3)
+    task.cancel()
+    release.set()
+    with pytest.raises(asyncio.CancelledError):
+        await task

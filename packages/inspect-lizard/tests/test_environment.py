@@ -341,3 +341,49 @@ async def test_large_command_output_uses_chunks(environment, monkeypatch):
     environment.sandbox.fs.read_bytes = limited
     result = await environment.exec([sys.executable, "-c", "print('x' * (16 * 1024 * 1024))"])
     assert len(result.stdout) == 16 * 1024 * 1024 + 1
+
+
+def test_config_works_in_inspect_cache_key():
+    from inspect_ai import Task
+    from inspect_ai.dataset import Sample
+
+    task = Task(dataset=[Sample(input="example")], sandbox=("lizard", LizardSandboxConfig()))
+    cache = {task.sandbox: "resolved"}
+    same = Task(dataset=[Sample(input="another")], sandbox=("lizard", LizardSandboxConfig()))
+    assert cache[same.sandbox] == "resolved"
+
+
+async def test_cancelled_poll_preserves_cancellation_after_not_found(environment):
+    import threading
+
+    started = threading.Event()
+    release = threading.Event()
+    stopped = False
+    reads = 0
+
+    async def control(action, value):
+        nonlocal stopped
+        if action == "start":
+            return {"pid": 2147483647}
+        if action == "stop":
+            stopped = True
+        return {}
+
+    def delayed_read(path):
+        nonlocal reads
+        reads += 1
+        if reads == 1:
+            started.set()
+            release.wait(3)
+            raise NotFoundError(path)
+        return '{"returncode": 0, "stdout_size": 0, "stderr_size": 0}'
+
+    environment._control = control
+    environment.sandbox.fs.read = delayed_read
+    task = asyncio.create_task(environment.exec(["scripted-command"]))
+    await asyncio.to_thread(started.wait, 3)
+    task.cancel()
+    release.set()
+    with pytest.raises(asyncio.CancelledError):
+        await task
+    assert stopped
