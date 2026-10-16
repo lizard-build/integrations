@@ -9,7 +9,7 @@ Lizard (lizard.build) provides cloud sandboxes for agent code. This repository c
 | [inspect-lizard](packages/inspect-lizard) | Inspect AI 0.3.280+ | One sandbox per evaluation sample |
 | [@lizard-build/mastra](packages/mastra) | Mastra 1.75+ | Workspace command execution and file writes |
 
-Lizard maintains these external packages. Framework maintainers review catalog entries separately. [lizard-adk 0.1.0](https://pypi.org/project/lizard-adk/0.1.0/) is available on PyPI. The other first releases are pending; use their source install steps.
+Lizard maintains these external packages. The Python packages are available on PyPI: [lizard-adk](https://pypi.org/project/lizard-adk/), [smolagents-lizard](https://pypi.org/project/smolagents-lizard/), and [inspect-lizard](https://pypi.org/project/inspect-lizard/). The first npm release of `@lizard-build/mastra` is pending; use its [source install steps](packages/mastra/README.md). Framework maintainers review catalog entries separately.
 
 ## Setup
 
@@ -54,7 +54,7 @@ Each Python package has its own workflow. PyPI requires a distinct publisher ide
 | `smolagents-lizard` | [publish-smolagents.yml](.github/workflows/publish-smolagents.yml) |
 | `inspect-lizard` | [publish-inspect.yml](.github/workflows/publish-inspect.yml) |
 
-For each pending publisher, set owner to `lizard-build`, repository to `integrations`, and workflow to the filename above, without `.github/workflows/`. Leave the environment name empty. After setup, run that package's workflow from `main` with the version in its `pyproject.toml`. It checks the version, runs tests, builds the files, and publishes through PyPI Trusted Publishing.
+All three Python projects have Trusted Publishers configured with GitHub owner `lizard-build`, repository `integrations`, the workflow filename above, and no environment name. Manage each publisher from its PyPI project's Publishing page. For a new release, update the version in the package's `pyproject.toml`, then run its workflow from `main` with that version. The workflow checks the version, runs tests, builds the files, and publishes through PyPI Trusted Publishing.
 
 The Mastra package uses the npm scope `@lizard-build`. Build, test, and inspect `npm pack --dry-run` before publishing from an account with access to that scope.
 
