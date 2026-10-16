@@ -10,7 +10,7 @@ Lizard (lizard.build) provides cloud sandboxes for agent code. This repository c
 | [@lizard-build/mastra](packages/mastra) | Mastra 1.75+ | Workspace command execution and file writes |
 | [@lizard-build/opencode](packages/opencode) | OpenCode 2.0.30 / 1.19.2 | Per-session shell and text file tools |
 
-Lizard maintains these external packages. The Python packages are available on PyPI: [lizard-adk](https://pypi.org/project/lizard-adk/), [smolagents-lizard](https://pypi.org/project/smolagents-lizard/), and [inspect-lizard](https://pypi.org/project/inspect-lizard/). The first npm releases of `@lizard-build/mastra` and `@lizard-build/opencode` are pending; use their [Mastra](packages/mastra/README.md) and [OpenCode](packages/opencode/README.md) source install steps. Framework maintainers review catalog entries separately.
+Lizard maintains these external packages. The Python packages are available on PyPI: [lizard-adk](https://pypi.org/project/lizard-adk/), [smolagents-lizard](https://pypi.org/project/smolagents-lizard/), and [inspect-lizard](https://pypi.org/project/inspect-lizard/). The [OpenCode package](https://www.npmjs.com/package/@lizard-build/opencode) is available on npm. The first npm release of `@lizard-build/mastra` is pending; use its [source install steps](packages/mastra/README.md). Framework maintainers review catalog entries separately.
 
 ## Setup
 
