@@ -1,0 +1,5 @@
+{
+  "plugins": [
+    { "package": "@lizard-build/opencode", "options": { "lifetimeMs": 900000 } }
+  ]
+}

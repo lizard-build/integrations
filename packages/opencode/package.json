@@ -1,0 +1,82 @@
+{
+  "name": "@lizard-build/opencode",
+  "version": "0.1.0",
+  "description": "Lizard Sandboxes tools for OpenCode sessions.",
+  "type": "module",
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "examples",
+    "server.js"
+  ],
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./v1": {
+      "types": "./dist/v1.d.ts",
+      "import": "./dist/v1.js"
+    },
+    "./runtime": {
+      "types": "./dist/runtime.d.ts",
+      "import": "./dist/runtime.js"
+    },
+    "./server": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc --noEmit -p tsconfig.test.json",
+    "test": "vitest run tests --exclude '**/*.live.test.ts'",
+    "test:live": "vitest run tests/*.live.test.ts"
+  },
+  "dependencies": {
+    "@lizard-build/sdk": "^0.1.69"
+  },
+  "peerDependencies": {
+    "@opencode/plugin": "^2.0.30",
+    "@opencode-ai/plugin": "^1.19.2",
+    "effect": "^4.0.1"
+  },
+  "peerDependenciesMeta": {
+    "@opencode/plugin": {
+      "optional": true
+    },
+    "@opencode-ai/plugin": {
+      "optional": true
+    },
+    "effect": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@opencode/plugin": "2.0.30",
+    "@opencode-ai/plugin": "1.19.2",
+    "effect": "4.0.1",
+    "@types/node": "^22.0.0",
+    "typescript": "^5.9.3",
+    "vitest": "^5.0.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lizard-build/integrations.git",
+    "directory": "packages/opencode"
+  },
+  "homepage": "https://github.com/lizard-build/integrations/tree/main/packages/opencode",
+  "bugs": {
+    "url": "https://github.com/lizard-build/integrations/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

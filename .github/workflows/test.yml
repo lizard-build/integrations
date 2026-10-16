@@ -49,3 +49,21 @@ jobs:
         run: |
           python scripts/sync-worker.py
           git diff --exit-code -- packages/mastra/src/worker.ts
+
+  opencode:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packages/opencode
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: packages/opencode/package-lock.json
+      - run: npm ci
+      - run: npm run build
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm pack --dry-run
