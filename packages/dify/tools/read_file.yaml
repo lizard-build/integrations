@@ -1,0 +1,35 @@
+identity:
+  name: read_file
+  author: lizard_build
+  label:
+    en_US: Read file
+description:
+  human:
+    en_US: Read up to 64 KiB from a regular file in the sandbox. Returns a truncated
+      flag when there is more data.
+  llm: Read up to 64 KiB from a regular file in the sandbox. Returns a truncated flag
+    when there is more data.
+parameters:
+- name: sandbox_id
+  type: string
+  required: true
+  label:
+    en_US: Sandbox id
+  human_description:
+    en_US: ID returned by Create sandbox. Only sandboxes created by this plugin in
+      the configured project can be used.
+  llm_description: ID returned by Create sandbox. Only sandboxes created by this plugin
+    in the configured project can be used.
+  form: llm
+- name: path
+  type: string
+  required: true
+  label:
+    en_US: Path
+  human_description:
+    en_US: Path in the guest. Relative paths start at /workspace.
+  llm_description: Path in the guest. Relative paths start at /workspace.
+  form: llm
+extra:
+  python:
+    source: tools/read_file.py

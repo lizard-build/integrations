@@ -1,0 +1,42 @@
+identity:
+  name: write_file
+  author: lizard_build
+  label:
+    en_US: Write file
+description:
+  human:
+    en_US: Write UTF-8 text, up to 64 KiB, to a file in the sandbox.
+  llm: Write UTF-8 text, up to 64 KiB, to a file in the sandbox.
+parameters:
+- name: sandbox_id
+  type: string
+  required: true
+  label:
+    en_US: Sandbox id
+  human_description:
+    en_US: ID returned by Create sandbox. Only sandboxes created by this plugin in
+      the configured project can be used.
+  llm_description: ID returned by Create sandbox. Only sandboxes created by this plugin
+    in the configured project can be used.
+  form: llm
+- name: path
+  type: string
+  required: true
+  label:
+    en_US: Path
+  human_description:
+    en_US: Path in the guest. Relative paths start at /workspace.
+  llm_description: Path in the guest. Relative paths start at /workspace.
+  form: llm
+- name: content
+  type: string
+  required: true
+  label:
+    en_US: Content
+  human_description:
+    en_US: Text to write. An empty string creates an empty file.
+  llm_description: Text to write. An empty string creates an empty file.
+  form: llm
+extra:
+  python:
+    source: tools/write_file.py

@@ -1,0 +1,2 @@
+dify-plugin==0.10.2
+lizard-sdk==0.1.71

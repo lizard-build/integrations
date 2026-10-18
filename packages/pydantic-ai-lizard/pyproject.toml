@@ -1,0 +1,40 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "pydantic-ai-lizard"
+version = "0.1.0"
+description = "Pydantic AI workspaces in Lizard Sandboxes."
+readme = "README.md"
+requires-python = ">=3.11"
+license = "Apache-2.0"
+authors = [{name = "Lizard"}]
+dependencies = ["lizard-sdk>=0.1.71,<0.2", "pydantic-ai-slim>=2.57,<3", "anyio>=4,<5"]
+
+[project.urls]
+Homepage = "https://lizard.build/sandboxes"
+Repository = "https://github.com/lizard-build/integrations/tree/main/packages/pydantic-ai-lizard"
+Issues = "https://github.com/lizard-build/integrations/issues"
+
+[project.optional-dependencies]
+dev = ["pydantic-ai-harness>=0.57,<0.58", "pytest>=8", "pytest-asyncio>=0.24", "pytest-socket>=0.7", "ruff>=0.9", "mypy>=1.14", "build", "twine"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/pydantic_ai_lizard"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+asyncio_default_test_loop_scope = "module"
+markers = ["live: creates temporary cloud resources; requires LIZARD_LIVE_TESTS=1"]
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]
+
+[tool.mypy]
+python_version = "3.11"
+check_untyped_defs = true
+ignore_missing_imports = true
