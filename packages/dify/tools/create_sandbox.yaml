@@ -1,0 +1,45 @@
+identity:
+  name: create_sandbox
+  author: lizard_build
+  label:
+    en_US: Create sandbox
+description:
+  human:
+    en_US: Create a temporary Linux sandbox. Save its sandbox_id for later tools.
+      It expires automatically.
+  llm: Create a temporary Linux sandbox. Save its sandbox_id for later tools. It expires
+    automatically.
+parameters:
+- name: lifetime_seconds
+  type: number
+  required: false
+  label:
+    en_US: Lifetime seconds
+  human_description:
+    en_US: Sandbox lifetime in seconds, from 60 to 1800.
+  llm_description: Sandbox lifetime in seconds, from 60 to 1800.
+  form: llm
+  default: 600
+- name: size
+  type: select
+  required: false
+  label:
+    en_US: Size
+  human_description:
+    en_US: Machine size.
+  llm_description: Machine size.
+  form: llm
+  default: small
+  options:
+  - value: small
+    label:
+      en_US: small
+  - value: medium
+    label:
+      en_US: medium
+  - value: large
+    label:
+      en_US: large
+extra:
+  python:
+    source: tools/create_sandbox.py

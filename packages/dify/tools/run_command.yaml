@@ -1,0 +1,45 @@
+identity:
+  name: run_command
+  author: lizard_build
+  label:
+    en_US: Run command
+description:
+  human:
+    en_US: Run a shell command inside the sandbox. Commands have network access and
+      can change the guest filesystem.
+  llm: Run a shell command inside the sandbox. Commands have network access and can
+    change the guest filesystem.
+parameters:
+- name: sandbox_id
+  type: string
+  required: true
+  label:
+    en_US: Sandbox id
+  human_description:
+    en_US: ID returned by Create sandbox. Only sandboxes created by this plugin in
+      the configured project can be used.
+  llm_description: ID returned by Create sandbox. Only sandboxes created by this plugin
+    in the configured project can be used.
+  form: llm
+- name: command
+  type: string
+  required: true
+  label:
+    en_US: Command
+  human_description:
+    en_US: Shell command to execute in /workspace.
+  llm_description: Shell command to execute in /workspace.
+  form: llm
+- name: timeout_seconds
+  type: number
+  required: false
+  label:
+    en_US: Timeout seconds
+  human_description:
+    en_US: Command deadline from 1 to 120 seconds.
+  llm_description: Command deadline from 1 to 120 seconds.
+  form: llm
+  default: 30
+extra:
+  python:
+    source: tools/run_command.py

@@ -1,0 +1,34 @@
+identity:
+  author: lizard_build
+  name: lizard_sandboxes
+  label:
+    en_US: Lizard Sandboxes
+  description:
+    en_US: Run commands and work with files in Lizard Sandboxes.
+  icon: icon.svg
+credentials_for_provider:
+  api_key:
+    type: secret-input
+    required: true
+    label:
+      en_US: API key
+    help:
+      en_US: Create an API key in your Lizard account. Keep it in provider settings.
+    url: https://lizard.build
+  project_id:
+    type: text-input
+    required: true
+    label:
+      en_US: Project ID
+    help:
+      en_US: Use the ID of the project that will own and pay for these sandboxes.
+    url: https://lizard.build
+tools:
+- tools/create_sandbox.yaml
+- tools/run_command.yaml
+- tools/write_file.yaml
+- tools/read_file.yaml
+- tools/destroy_sandbox.yaml
+extra:
+  python:
+    source: provider/lizard.py

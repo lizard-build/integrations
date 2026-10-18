@@ -1,0 +1,26 @@
+identity:
+  name: destroy_sandbox
+  author: lizard_build
+  label:
+    en_US: Destroy sandbox
+description:
+  human:
+    en_US: Destroy the sandbox and discard its files. Use only when the workflow no
+      longer needs it.
+  llm: Destroy the sandbox and discard its files. Use only when the workflow no longer
+    needs it.
+parameters:
+- name: sandbox_id
+  type: string
+  required: true
+  label:
+    en_US: Sandbox id
+  human_description:
+    en_US: ID returned by Create sandbox. Only sandboxes created by this plugin in
+      the configured project can be used.
+  llm_description: ID returned by Create sandbox. Only sandboxes created by this plugin
+    in the configured project can be used.
+  form: llm
+extra:
+  python:
+    source: tools/destroy_sandbox.py

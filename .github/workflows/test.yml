@@ -11,7 +11,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        package: [lizard-adk, smolagents-lizard, inspect-lizard]
+        package: [lizard-adk, smolagents-lizard, inspect-lizard, pydantic-ai-lizard]
         python: ['3.11', '3.12']
     defaults:
       run:
@@ -50,6 +50,50 @@ jobs:
           python scripts/sync-worker.py
           git diff --exit-code -- packages/mastra/src/worker.ts
 
+  tanstack-ai:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packages/tanstack-ai
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: packages/tanstack-ai/package-lock.json
+      - run: npm ci
+      - run: npm run build
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm pack --dry-run
+
+  dify:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packages/dify
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r requirements.txt pytest pytest-socket ruff
+      - run: ruff check .
+      - run: ruff format --check .
+      - name: Unit tests with Dify's gevent runtime
+        run: |
+          python - <<'PY'
+          import dify_plugin
+          import pytest
+          raise SystemExit(pytest.main(['tests', '-m', 'not live', '--disable-socket', '--allow-unix-socket']))
+          PY
+      - name: Load manifest and tools through the Dify SDK
+        run: |
+          python - <<'PY'
+          from dify_plugin import Plugin, DifyPluginEnv
+          Plugin(DifyPluginEnv())
+          PY
   opencode:
     runs-on: ubuntu-latest
     defaults:
