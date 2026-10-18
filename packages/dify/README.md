@@ -15,11 +15,20 @@ The plugin is free to install. Lizard usage requires a Lizard account: Pro costs
 
 Connect these tool nodes in order:
 
-1. **Create sandbox**: size `small`, lifetime `600` seconds. Save `json.sandbox_id`.
+1. **Create sandbox**: size `small`, lifetime `600` seconds. The `json` output is an array; the ID is in its first object, at `json[0].sandbox_id`.
 2. **Write file**: pass that ID, path `example.py`, and content `print(6 * 7)`.
 3. **Run command**: pass the same ID and command `python3 example.py`. The JSON output contains `stdout`, `stderr`, `exit_code`, and `truncated`.
 4. **Read file**: pass the same ID and path `example.py` to retrieve its text.
 5. **Destroy sandbox**: pass the same ID when the workflow is done.
+
+To pass the ID between workflow nodes, add a **Code** node after **Create sandbox**. Map its `items` input to the create tool's `json` output, declare a string output named `sandbox_id`, and use this Python code:
+
+```python
+def main(items: list[dict]) -> dict:
+    return {"sandbox_id": items[0]["sandbox_id"]}
+```
+
+Select that Code node's `sandbox_id` output in each later tool's **Sandbox id** field.
 
 Always route errors to cleanup when possible. If a workflow stops before cleanup, the fixed lifetime expires the sandbox and discards its files. The default is ten minutes; the maximum is thirty minutes.
 
