@@ -5,7 +5,7 @@ identity:
     en_US: Lizard Sandboxes
   description:
     en_US: Run commands and work with files in Lizard Sandboxes.
-  icon: icon.svg
+  icon: icon.png
 credentials_for_provider:
   api_key:
     type: secret-input
