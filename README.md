@@ -21,7 +21,7 @@ Create a project and an API key at [lizard.build](https://lizard.build/). Set `L
 
 All adapters use the `interpreter` template. They do not accept arbitrary Docker images or Compose files. See each package for its cleanup rules and limits.
 
-The [Pydantic AI package](https://pypi.org/project/pydantic-ai-lizard/) is available on PyPI. The first release of `@lizard-build/tanstack-ai` awaits npm publication; build `packages/tanstack-ai` and install its `npm pack` archive to use its source. Dify Marketplace approval is separate from packaging and testing.
+The [Pydantic AI package](https://pypi.org/project/pydantic-ai-lizard/) is available on PyPI. The [TanStack AI package](https://www.npmjs.com/package/@lizard-build/tanstack-ai) is available on npm. Dify Marketplace approval is separate from packaging and testing.
 
 ## Test
 
