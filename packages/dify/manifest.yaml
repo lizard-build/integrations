@@ -1,4 +1,4 @@
-version: 0.1.0
+version: 0.1.1
 type: plugin
 author: lizard_build
 name: lizard_sandboxes
@@ -6,7 +6,7 @@ label:
   en_US: Lizard Sandboxes
 description:
   en_US: Run commands and work with files in Lizard (lizard.build) cloud sandboxes.
-icon: icon.svg
+icon: icon.png
 resource:
   memory: 268435456
   permission: {}

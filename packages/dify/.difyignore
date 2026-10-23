@@ -12,3 +12,4 @@ examples
 pyproject.toml
 requirements-dev.txt
 *.difypkg
+_assets/icon.svg
